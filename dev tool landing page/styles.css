@@ -1,0 +1,51 @@
+body {
+    background-color: black;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 40px;
+}
+
+nav img {
+    width: 95px;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 14px;
+}
+
+button {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #444;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.download {
+    background: white;
+    color: black;
+    border: none;
+}
