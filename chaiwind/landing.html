@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chaiwind — Hello Chai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --brown: #3b1f0a;
+      --chai: #c47d2b;
+      --steam: rgba(196,125,43,0.15);
+    }
+
+    body {
+      background-color: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      overflow: hidden;
+      position: relative;
+    }
+
+    
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      animation: drift 8s ease-in-out infinite alternate;
+    }
+    .bg-orb-1 {
+      width: 400px; height: 400px;
+      background: var(--chai);
+      top: -100px; left: -100px;
+      animation-delay: 0s;
+    }
+    .bg-orb-2 {
+      width: 300px; height: 300px;
+      background: #8b3a0f;
+      bottom: -80px; right: -80px;
+      animation-delay: -3s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.05); }
+    }
+
+    
+    .card {
+      position: relative;
+      background: white;
+      border: 2px solid var(--brown);
+      border-radius: 2px;
+      box-shadow: 8px 8px 0 var(--brown);
+      text-align: center;
+      overflow: visible;
+      animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(40px) rotate(-1deg); }
+      to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+    }
+
+    
+    .cup-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+      animation: rise 0.8s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .cup {
+      position: relative;
+      width: 64px;
+    }
+    .cup svg {
+      width: 64px;
+      height: auto;
+    }
+
+    
+    .steam-line {
+      position: absolute;
+      width: 3px;
+      border-radius: 99px;
+      background: var(--chai);
+      bottom: 100%;
+      opacity: 0;
+      animation: steam 2.5s ease-in-out infinite;
+    }
+    .steam-line:nth-child(1) { left: 22px; height: 18px; animation-delay: 0s; }
+    .steam-line:nth-child(2) { left: 30px; height: 24px; animation-delay: 0.4s; }
+    .steam-line:nth-child(3) { left: 38px; height: 16px; animation-delay: 0.8s; }
+    @keyframes steam {
+      0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+      30%  { opacity: 0.7; }
+      100% { opacity: 0; transform: translateY(-28px) scaleX(0.5); }
+    }
+
+    
+    .heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -1px;
+      line-height: 1;
+      animation: rise 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .chai-accent {
+      color: var(--chai);
+      font-style: italic;
+    }
+
+    
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: rise 0.8s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .tag {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      background: var(--brown);
+      color: var(--cream);
+      padding: 4px 10px;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+    }
+    .tag.outline {
+      background: transparent;
+      border: 1.5px solid var(--brown);
+      color: var(--brown);
+    }
+
+    
+    .code-block {
+      background: var(--brown);
+      color: var(--cream);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      border-radius: 2px;
+      line-height: 1.7;
+      text-align: left;
+      animation: rise 0.8s 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .code-block .prop { color: var(--chai); }
+    .code-block .val  { color: #f0d9b5; }
+
+    
+    .footer-note {
+      font-size: 11px;
+      color: #a08060;
+      letter-spacing: 0.05em;
+      animation: rise 0.8s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--brown), transparent);
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  
+  <div class="card chai-p-20 chai-m-12" style="max-width:420px; width:90%;">
+
+    
+    <div class="cup-wrap">
+      <div class="cup">
+        <div class="steam-line"></div>
+        <div class="steam-line"></div>
+        <div class="steam-line"></div>
+        <svg viewBox="0 0 64 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 14h48l-6 32H14L8 14Z" fill="#c47d2b"/>
+          <path d="M8 14h48" stroke="#3b1f0a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M14 46h36" stroke="#3b1f0a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M56 18c4 0 7 2 7 6s-3 6-7 6" stroke="#3b1f0a" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="20" y="48" width="24" height="4" rx="2" fill="#3b1f0a"/>
+        </svg>
+      </div>
+    </div>
+
+    
+    <div class="heading" style="font-size: 52px; margin-bottom: 6px;">
+      Hello <span class="chai-accent">Chai</span>
+    </div>
+
+    <p style="font-size:13px; color:#a08060; margin-bottom:18px; font-family:'DM Mono',monospace;">
+      utility-first CSS, handcrafted in JS
+    </p>
+
+    <div class="divider" style="margin-bottom:18px;"></div>
+
+    
+    <div class="tag-row" style="margin-bottom: 18px;">
+      <span class="tag">chai-p-20</span>
+      <span class="tag">chai-m-12</span>
+      <span class="tag outline">chai-bg-white</span>
+      <span class="tag outline">chai-text-black</span>
+      <span class="tag outline">chai-flex</span>
+    </div>
+
+    
+    <div class="code-block chai-p-10" style="margin-bottom:18px;">
+      <div><span class="prop">chai-p-4</span>  → <span class="val">padding: 8px</span></div>
+      <div><span class="prop">chai-bg-red</span> → <span class="val">background-color: red</span></div>
+      <div><span class="prop">chai-text-white</span> → <span class="val">color: white</span></div>
+      <div><span class="prop">chai-w-50</span> → <span class="val">width: 100px</span></div>
+    </div>
+
+    
+    <div class="chai-flex" style="gap:8px; justify-content:center; margin-bottom:18px;">
+      <div class="chai-bg-red chai-w-8 chai-h-8" style="border-radius:2px; border:1.5px solid #3b1f0a;"></div>
+      <div class="chai-bg-blue chai-w-8 chai-h-8" style="border-radius:2px; border:1.5px solid #3b1f0a;"></div>
+      <div class="chai-bg-green chai-w-8 chai-h-8" style="border-radius:2px; border:1.5px solid #3b1f0a;"></div>
+      <div class="chai-bg-black chai-w-8 chai-h-8" style="border-radius:2px; border:1.5px solid #3b1f0a;"></div>
+      <div class="chai-bg-white chai-w-8 chai-h-8" style="border-radius:2px; border:1.5px solid #3b1f0a;"></div>
+    </div>
+
+    <div class="footer-note">🍵 CHAIWIND · NO BUILD · NO DEPS · JUST CLASS NAMES</div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
